@@ -27,9 +27,14 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <stdbool.h>
 
 /* USER CODE BEGIN Includes */
+extern int count;  // Define the actual variable
+extern int *pCount;  // Initialize the pointer
 
+extern bool prev_val;
+extern bool *pPrevVal;
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */

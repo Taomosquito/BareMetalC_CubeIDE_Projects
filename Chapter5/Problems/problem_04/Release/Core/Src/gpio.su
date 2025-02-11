@@ -1,3 +1,2 @@
-../Core/Inc/morse_functions.h:42:6:morse_selector	24	static
-../Core/Src/gpio.c:43:6:MX_GPIO_Init	48	static
-../Core/Src/gpio.c:83:6:HAL_GPIO_EXTI_Callback	8	static
+../Core/Src/gpio.c:42:6:MX_GPIO_Init	48	static
+../Core/Src/gpio.c:81:6:HAL_GPIO_EXTI_Callback	0	static

@@ -23,7 +23,6 @@
 
 /* USER CODE BEGIN 0 */
 #include <stdbool.h>
-#include "morse_functions.h"
 /* USER CODE END 0 */
 
 /*----------------------------------------------------------------------------*/
@@ -73,69 +72,27 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 2 */
+int count = 0;        // Define count
+int *pCount = &count; // Initialize pointer
 
-int count;
-int *pCount = &count;
-
-bool prev_val = false;  // Declare the static variable as a pointer
-bool *pPrevVal = &prev_val;
+bool prev_val = false;   // Define prev_val
+bool *pPrevVal = &prev_val; // Initialize pointer
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
     if (GPIO_Pin == B1_Pin) {
         if (!(*pPrevVal)) {  // Dereference the pointer to check the value of prev_val
             // Increment count and handle reset if necessary
-            if (++(*pCount) >= 10) {
+            if (*pCount >= 10) {
                 *pCount = 0;
             }
+            ++*pCount;
             *pPrevVal = true;  // Set prev_val to true via the pointer
+            __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_Pin);
         }
     } else {
         *pPrevVal = false;  // Reset prev_val when the button is released
+        __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_Pin);
     }
 
-	switch (count) {
-		case 0: {
-			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
-			break;
-		}
-		case 1: {
-			MORSE_SELECTOR(MORSE_H);
-			break;
-		}
-		case 2: {
-			MORSE_SELECTOR(MORSE_E);
-			break;
-		}
-		case 3: {
-			MORSE_SELECTOR(MORSE_L);
-			break;
-		}
-		case 4: {
-			MORSE_SELECTOR(MORSE_L);
-			break;
-		}
-		case 5: {
-			MORSE_SELECTOR(MORSE_O);
-			break;
-		}
-		case 6: {
-			MORSE_SELECTOR(MORSE_W);
-			break;
-		}
-		case 7: {
-			MORSE_SELECTOR(MORSE_O);
-			break;
-		}
-		case 8: {
-			MORSE_SELECTOR(MORSE_R);
-			break;
-		}
-		case 9: {
-			MORSE_SELECTOR(MORSE_L);
-			break;
-		}
-		default:
-			MORSE_SELECTOR(MORSE_D);
-	}
 }
 /* USER CODE END 2 */
