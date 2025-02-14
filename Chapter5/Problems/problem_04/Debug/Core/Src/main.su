@@ -1,4 +1,4 @@
 ../Core/Inc/morse_functions.h:42:6:morse_selector	24	static
 ../Core/Src/main.c:65:5:main	8	static,ignoring_inline_asm
-../Core/Src/main.c:152:6:SystemClock_Config	80	static
-../Core/Src/main.c:194:6:Error_Handler	8	static,ignoring_inline_asm
+../Core/Src/main.c:151:6:SystemClock_Config	80	static
+../Core/Src/main.c:193:6:Error_Handler	8	static,ignoring_inline_asm

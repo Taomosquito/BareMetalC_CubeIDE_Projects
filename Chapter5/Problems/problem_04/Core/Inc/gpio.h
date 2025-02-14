@@ -27,17 +27,17 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <stdbool.h>
+
 
 /* USER CODE BEGIN Includes */
-extern int count;  // Define the actual variable
-extern int *pCount;  // Initialize the pointer
+#include <stdbool.h>
 
-extern bool prev_val;
-extern bool *pPrevVal;
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
+extern int *pCount;  // Declare the pointer (no need for extern)
+
+#define COUNT_INCREMENT() (++*pCount)
 
 /* USER CODE END Private defines */
 

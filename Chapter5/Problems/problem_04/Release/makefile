@@ -61,7 +61,7 @@ main-build: problem_04.elf secondary-outputs
 
 # Tool invocations
 problem_04.elf problem_04.map: $(OBJS) $(USER_OBJS) /home/scott/STM32CubeIDE/BareMetalC_Problems_AND_Exercises/Chapter5/Problems/problem_04/STM32F030R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "problem_04.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"/home/scott/STM32CubeIDE/BareMetalC_Problems_AND_Exercises/Chapter5/Problems/problem_04/STM32F030R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="problem_04.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "problem_04.elf" @"objects.list" $(USER_OBJS) -Wl,--start-group $(LIBS) -Wl,--end-group -mcpu=cortex-m0 -T"/home/scott/STM32CubeIDE/BareMetalC_Problems_AND_Exercises/Chapter5/Problems/problem_04/STM32F030R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="problem_04.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

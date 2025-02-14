@@ -72,27 +72,17 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 2 */
-int count = 0;        // Define count
-int *pCount = &count; // Initialize pointer
-
-bool prev_val = false;   // Define prev_val
-bool *pPrevVal = &prev_val; // Initialize pointer
+int count = 0;  // Define the actual variable (only once here)
+int *pCount = &count;  // Initialize the pointer
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
     if (GPIO_Pin == B1_Pin) {
-        if (!(*pPrevVal)) {  // Dereference the pointer to check the value of prev_val
-            // Increment count and handle reset if necessary
-            if (*pCount >= 10) {
-                *pCount = 0;
-            }
-            ++*pCount;
-            *pPrevVal = true;  // Set prev_val to true via the pointer
-            __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_Pin);
+        // Increment the count and check if it reaches 10
+        COUNT_INCREMENT();  // Increment the counter
+        if (*pCount >= 10) {  // If count is 10 or more, reset it
+            *pCount = 0;
         }
-    } else {
-        *pPrevVal = false;  // Reset prev_val when the button is released
-        __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_Pin);
+        __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_Pin);  // Clear the interrupt flag
     }
-
 }
 /* USER CODE END 2 */
