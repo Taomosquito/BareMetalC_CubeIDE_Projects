@@ -35,9 +35,11 @@ extern "C" {
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
-extern int *pCount;  // Declare the pointer (no need for extern)
+extern int *pCount;
+extern _Bool *pTaskComplete;
 
 #define COUNT_INCREMENT() (++*pCount)
+#define TASK_COMPLETER()(*pTaskComplete = !(*pTaskComplete));
 
 /* USER CODE END Private defines */
 

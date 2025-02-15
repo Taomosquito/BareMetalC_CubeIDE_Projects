@@ -23,7 +23,6 @@
 
 /* USER CODE BEGIN 0 */
 #include <stdbool.h>
-#include "morse_functions.h"
 /* USER CODE END 0 */
 
 /*----------------------------------------------------------------------------*/
@@ -69,68 +68,20 @@ void MX_GPIO_Init(void)
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI4_15_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
-
 }
 
 /* USER CODE BEGIN 2 */
-
-extern volatile int count = 0;
-extern volatile pCount = &count;
+int count = 0;  // Define the actual variable (only once here)
+int *pCount = &count;  // Initialize the pointer
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if (GPIO_Pin == B1_Pin) {
-		static bool prev_val = false;
-		if (!prev_val) {
-			++(pCount);
-			prev_val = true;
-			if (count > 10) {
-				count = 0;
-			}
-		}
-	}
-	switch (count) {
-		case 0: {
-			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
-			break;
-		}
-		case 1: {
-			MORSE_SELECTOR(MORSE_H);
-			break;
-		}
-		case 2: {
-			MORSE_SELECTOR(MORSE_E);
-			break;
-		}
-		case 3: {
-			MORSE_SELECTOR(MORSE_L);
-			break;
-		}
-		case 4: {
-			MORSE_SELECTOR(MORSE_L);
-			break;
-		}
-		case 5: {
-			MORSE_SELECTOR(MORSE_O);
-			break;
-		}
-		case 6: {
-			MORSE_SELECTOR(MORSE_W);
-			break;
-		}
-		case 7: {
-			MORSE_SELECTOR(MORSE_O);
-			break;
-		}
-		case 8: {
-			MORSE_SELECTOR(MORSE_R);
-			break;
-		}
-		case 9: {
-			MORSE_SELECTOR(MORSE_L);
-			break;
-		}
-		default:
-			MORSE_SELECTOR(MORSE_D);
-	}
+    if (GPIO_Pin == B1_Pin) {
+        // Increment the count and check if it reaches 10
+        COUNT_INCREMENT();  // Increment the counter
+        if (*pCount >= 10) {  // If count is 10 or more, reset it
+            *pCount = 0;
+        }
+        __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_Pin);  // Clear the interrupt flag
+    }
 }
 /* USER CODE END 2 */

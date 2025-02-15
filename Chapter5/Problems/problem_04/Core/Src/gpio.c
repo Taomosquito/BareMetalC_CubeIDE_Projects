@@ -68,20 +68,19 @@ void MX_GPIO_Init(void)
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI4_15_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
-
 }
 
 /* USER CODE BEGIN 2 */
-int count = 0;  // Define the actual variable (only once here)
-int *pCount = &count;  // Initialize the pointer
+int count = 0;
+int *pCount = &count;
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
     if (GPIO_Pin == B1_Pin) {
-        // Increment the count and check if it reaches 10
-        COUNT_INCREMENT();  // Increment the counter
-        if (*pCount >= 10) {  // If count is 10 or more, reset it
+        COUNT_INCREMENT();
+        if (*pCount >= 10) {
             *pCount = 0;
         }
+        TASK_COMPLETER();
         __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_Pin);  // Clear the interrupt flag
     }
 }

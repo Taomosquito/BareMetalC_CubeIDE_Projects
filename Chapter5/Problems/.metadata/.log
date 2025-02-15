@@ -470,3 +470,18 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64
 
 !ENTRY org.eclipse.cdt.core 1 0 2025-02-14 01:58:30.426
 !MESSAGE Indexed 'problem_04' (23 sources, 87 headers) in 1.71 sec: 4,670 declarations; 28,184 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0061%)
+!SESSION 2025-02-14 18:02:25.745 -----------------------------------------------
+eclipse.buildId=Version 1.17.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_CA
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-02-14 18:03:35.656
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-02-14 18:03:35.683
+!MESSAGE Log4j2 initialized with config file /home/scott/STM32CubeIDE/BareMetalC_Problems_AND_Exercises/Chapter5/Problems/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-02-14 18:03:47.854
+!MESSAGE Started RMI Server, listening on port 41337

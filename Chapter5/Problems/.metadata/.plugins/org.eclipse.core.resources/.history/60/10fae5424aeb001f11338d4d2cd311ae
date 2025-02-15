@@ -1,0 +1,56 @@
+/*
+ *
+ * This files sole purpose is to allow morse code functions to be handled elegantly!
+ */
+#include "gpio.h"
+
+int taskComplete = true;
+int *pTaskComplete = &taskComplete;
+
+int MORSE_A[] = {100, 500};
+int MORSE_B[] = {500, 100, 100, 100};
+int MORSE_C[] = {500, 100, 500, 100};
+int MORSE_D[] = {500, 100, 100};
+int MORSE_E[] = {100};
+int MORSE_F[] = {100, 100, 500, 100};
+int MORSE_G[] = {500, 500, 100};
+int MORSE_H[] = {100, 100, 100, 100};
+int MORSE_I[] = {100, 100};
+int MORSE_J[] = {100, 500, 500, 500};
+int MORSE_K[] = {500, 100, 500};
+int MORSE_L[] = {100, 500, 100, 100};
+int MORSE_M[] = {500, 500};
+int MORSE_N[] = {500, 100};
+int MORSE_O[] = {500, 500, 500};
+int MORSE_P[] = {100, 500, 500, 100};
+int MORSE_Q[] = {500, 500, 100, 500};
+int MORSE_R[] = {100, 500, 100};
+int MORSE_S[] = {100, 100, 100};
+int MORSE_T[] = {500};
+int MORSE_U[] = {100, 100, 500};
+int MORSE_V[] = {100, 100, 100, 500};
+int MORSE_W[] = {100, 500, 500};
+int MORSE_X[] = {500, 100, 100, 500};
+int MORSE_Y[] = {500, 100, 500, 500};
+int MORSE_Z[] = {500, 500, 100, 100};
+int MORSE_ONE[] = {100, 500, 500, 500, 500};
+int MORSE_TWO[] = {100, 100, 500, 500, 500};
+int MORSE_THREE[] = {100, 100, 100, 500, 500};
+int MORSE_FOUR[] = {100, 100, 100, 100, 500};
+int MORSE_FIVE[] = {100, 100, 100, 100, 100};
+int MORSE_SIX[] = {500, 100, 100, 100, 100};
+int MORSE_SEVEN[] = {500, 500, 100, 100, 100};
+int MORSE_EIGHT[] = {500, 500, 500, 100, 100};
+int MORSE_NINE[] = {500, 500, 500, 500, 100};
+int MORSE_TEN[] = {500, 500, 500, 500, 500};
+#define MORSE_SELECTOR(arr) morse_selector(arr, sizeof(arr) / sizeof(arr[0]))
+void morse_selector(int *arr, int size) {
+	for (int i = 0; i < size; i++){
+		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
+		HAL_Delay(arr[i]);
+		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
+		HAL_Delay(100);
+	}
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
+	TASK_COMPLETER();
+}

@@ -56,6 +56,8 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 extern int *pCount;
+_Bool taskComplete = true;
+_Bool *pTaskComplete = &taskComplete;
 /* USER CODE END 0 */
 
 /**
@@ -65,6 +67,7 @@ extern int *pCount;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -93,7 +96,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
+	  if(*pTaskComplete){
     /* USER CODE END WHILE */
+    /* USER CODE BEGIN 3 */
 		switch (*pCount) {
 			case 0: {
 				HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
@@ -101,6 +107,7 @@ int main(void)
 			}
 			case 1: {
 				MORSE_SELECTOR(MORSE_H);
+				__WFI();
 				break;
 			}
 			case 2: {
@@ -139,7 +146,7 @@ int main(void)
 			default:
 				MORSE_SELECTOR(MORSE_D);
 		}
-    /* USER CODE BEGIN 3 */
+	  }
   }
   /* USER CODE END 3 */
 }

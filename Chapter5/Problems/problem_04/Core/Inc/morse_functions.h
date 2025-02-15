@@ -2,6 +2,8 @@
  *
  * This files sole purpose is to allow morse code functions to be handled elegantly!
  */
+#include "gpio.h"
+
 int MORSE_A[] = {100, 500};
 int MORSE_B[] = {500, 100, 100, 100};
 int MORSE_C[] = {500, 100, 500, 100};
@@ -47,4 +49,5 @@ void morse_selector(int *arr, int size) {
 		HAL_Delay(100);
 	}
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
+	TASK_COMPLETER();
 }
